@@ -12,16 +12,16 @@ handler = WebhookHandler('ef9543e4b95c520018a463fb79b6e9d9')
 def hello():
     return "Hello World!"
 
-@app.route("/webhook", methods=['GET','POST'])
+@app.route("/webhook", methods=['POST'])
 def webhook():
-     get X-Line-Signature header value
+    # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
 
-     get request body as text
+    # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
 
-     handle webhook body
+    # handle webhook body
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
