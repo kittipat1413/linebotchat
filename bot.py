@@ -5,8 +5,8 @@ from linebot.models import (MessageEvent, TextMessage, TextSendMessage,)
 
 app = Flask(__name__)
 
-#line_bot_api = LineBotApi('X8H8tZp/fwqo7QXQxIYAzB9JFl5Rc7gGC8YGiVvoCMOCo+LXXsGJ49IsLX4x9uL66s7y6m03sbJQDKW9xQ0tTcpztuOdWjF0Z2Shf+CnpwVfYpZovZq/UC7IHQI1qZ8a0Pjx99uhV2Wtnis79+XREAdB04t89/1O/w1cDnyilFU=')
-#handler = WebhookHandler('ef9543e4b95c520018a463fb79b6e9d9')
+line_bot_api = LineBotApi('X8H8tZp/fwqo7QXQxIYAzB9JFl5Rc7gGC8YGiVvoCMOCo+LXXsGJ49IsLX4x9uL66s7y6m03sbJQDKW9xQ0tTcpztuOdWjF0Z2Shf+CnpwVfYpZovZq/UC7IHQI1qZ8a0Pjx99uhV2Wtnis79+XREAdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('ef9543e4b95c520018a463fb79b6e9d9')
 
 @app.route("/")
 def hello():
