@@ -2,6 +2,7 @@ from flask import Flask, request, abort
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage,)
+import json, urllib
 
 app = Flask(__name__)
 
@@ -40,7 +41,6 @@ def handle_message(event):
     elif event.message.text=='Get id':
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.source.user_id))
     elif event.message.text=='Get temp':
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="temperature: "))
         response = urllib.request.urlopen(url).read()
         data = json.loads(response.decode('utf-8'))
         data = data["lastest_data"][1]["values"][0][1]
