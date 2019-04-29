@@ -28,14 +28,27 @@ def webhook():
         abort(400)
 
     return 'OK'
-    
+
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+
+    url = 'https://api.netpie.io/feed/IOTROOM?apikey=vz8QtgHoM7EhWc7UdCPIuBVOTs4YKjZ2&granularity=10minute&since=1hour'
+
     if event.message.text=='Get token':
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.reply_token))
     elif event.message.text=='Get id':
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.source.user_id))
+    elif event.message.text=='Get temp':
+        response = urllib.request.urlopen(url).read()
+        data = json.loads(response.decode('utf-8'))
+        data = data["lastest_data"][1]["values"][0][1]
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="temperature: "+str(data)))
+    elif event.message.text=='Get humid':
+        response = urllib.request.urlopen(url).read()
+        data = json.loads(response.decode('utf-8'))
+        data = data["lastest_data"][0]["values"][0][1]
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Humidity: "+str(data)))
     else :
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
 
